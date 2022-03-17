@@ -1,9 +1,11 @@
+import "./styles/style.css"
+
 const FilmItem = ({film}) => {
     return (
-        <div key={film.title}>
-            <div><img src={`https://image.tmdb.org/t/p/original/${film.poster}`}/>{film.poster}</div>
-            <div>{film.title}</div>
-            <div>{film.overview}</div>
+        <div key={film.title} className={"FilmItem"}>
+            <img src={`https://image.tmdb.org/t/p/original/${film.poster}`}/>
+            <div className={"film-title"}>{film.title}</div>
+            <div>Rating: {film.rating}</div>
         </div>
     )
 }

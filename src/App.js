@@ -9,7 +9,7 @@ function App() {
 
     const [films, setFilms] = useState([]);
 
-    async function getFilms() {
+    async function getPopularFilms() {
         const data = await fetch(`${apiLink}/popular/${apiKey}`)
             .then(r => {
                 return r.json()
@@ -29,13 +29,29 @@ function App() {
     }
 
     useEffect(() => {
-        getFilms().then()
+        getPopularFilms().then()
     }, [])
+
+    function searchFilms(titleValue) {
+        if (titleValue && titleValue !== "") {
+            const filteredFilms = films.filter(film => film.title === titleValue)
+            setFilms(filteredFilms);
+        } else {
+            getPopularFilms().then()
+        }
+    }
+
 
     return (
         <div className="App">
-            <SearchForm/>
-            {films.map((film) => (<FilmItem key={film.title} film={film}/>))}
+            <SearchForm searchFilm={searchFilms}/>
+            <div className={"film-items_container"}>
+                {
+                    films.length ? films.map((film) => (<FilmItem key={film.title} film={film}/>))
+                        : <div>Sorry but we do not have such films!<br/>
+                             Press enter to come back;)
+                        </div>}
+            </div>
         </div>
     );
 }

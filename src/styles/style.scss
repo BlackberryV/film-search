@@ -1,0 +1,93 @@
+$title-color: #102244;
+$light-title-color: #efe6d7;
+$title-font: Almarai, sans-serif;
+
+@font-face {
+  font-style: normal;
+  font-weight: 500;
+  src: url("./fonts/almarai-v11-arabic-regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-style: normal;
+  font-weight: 700;
+  src: url("./fonts/almarai-v11-arabic-700.woff2") format("woff2");
+}
+
+
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 17px;
+  font-family: $title-font;
+  color: $title-color;
+}
+
+input {
+  outline: none;
+  border-radius: 0;
+  padding: 0 10px;
+  font-family: inherit;
+  font-size: inherit;
+  border: 2px solid $title-color;
+  color: $title-color;
+}
+
+button {
+  border-radius: 0;
+  background-color: $title-color;
+  border: 2px solid $title-color;
+  color: $light-title-color;
+  font-size: inherit;
+  font-family: inherit;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.film-items_container {
+  margin-top: 30px;
+  width: 92%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 15px;
+  color: $title-color;
+
+  .FilmItem {
+    width: 200px;
+    height: 380px;
+    background-color: #102244;
+    padding: 10px;
+    color: $light-title-color;
+
+    img {
+      width: 200px;
+      height: 280px;
+    }
+
+    .film-title {
+      margin: 9px 0;
+      font-size: 19px;
+    }
+  }
+}
+
+.SearchForm {
+  display: flex;
+  justify-content: space-between;
+  width: 60%;
+  margin-top: 30px;
+
+  button {
+    width: 100px;
+    height: 40px;
+  }
+
+  input {
+    width: 100%;
+  }
+}

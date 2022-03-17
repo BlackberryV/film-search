@@ -1,11 +1,11 @@
 import {useState} from "react";
 
-const SearchForm = () => {
+const SearchForm = ({searchFilm}) => {
 
     const [titleValue, setTitleValue] = useState('');
     function onSubmit(e) {
         e.preventDefault();
-        console.log(titleValue)
+        searchFilm(titleValue);
         setTitleValue('');
     }
 
@@ -14,7 +14,7 @@ const SearchForm = () => {
     }
 
     return (
-        <form onSubmit={onSubmit}>
+        <form onSubmit={onSubmit} className={"SearchForm"}>
             <input
                 type={"text"}
                 value={titleValue}

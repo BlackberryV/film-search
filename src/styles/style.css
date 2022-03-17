@@ -1,0 +1,83 @@
+@font-face {
+  font-style: normal;
+  font-weight: 500;
+  src: url("./fonts/almarai-v11-arabic-regular.woff2") format("woff2");
+}
+@font-face {
+  font-style: normal;
+  font-weight: 700;
+  src: url("./fonts/almarai-v11-arabic-700.woff2") format("woff2");
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 17px;
+  font-family: Almarai, sans-serif;
+  color: #102244;
+}
+
+input {
+  outline: none;
+  border-radius: 0;
+  padding: 0 10px;
+  font-family: inherit;
+  font-size: inherit;
+  border: 2px solid #102244;
+  color: #102244;
+}
+
+button {
+  border-radius: 0;
+  background-color: #102244;
+  border: 2px solid #102244;
+  color: #efe6d7;
+  font-size: inherit;
+  font-family: inherit;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.film-items_container {
+  margin-top: 30px;
+  width: 92%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 15px;
+  color: #102244;
+}
+.film-items_container .FilmItem {
+  width: 200px;
+  height: 380px;
+  background-color: #102244;
+  padding: 10px;
+  color: #efe6d7;
+}
+.film-items_container .FilmItem img {
+  width: 200px;
+  height: 280px;
+}
+.film-items_container .FilmItem .film-title {
+  margin: 9px 0;
+  font-size: 19px;
+}
+
+.SearchForm {
+  display: flex;
+  justify-content: space-between;
+  width: 60%;
+  margin-top: 30px;
+}
+.SearchForm button {
+  width: 100px;
+  height: 40px;
+}
+.SearchForm input {
+  width: 100%;
+}
+
+/*# sourceMappingURL=style.css.map */

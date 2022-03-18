@@ -1,9 +1,7 @@
 import SearchForm from "./Components/SearchForm";
 import {useEffect, useState} from "react";
-import {Link, Route, Router} from "react-router-dom";
+import {Route, Routes, Navigate, Link} from "react-router-dom";
 import List from "./Components/List";
-
-// import Route from
 
 function App() {
 
@@ -11,6 +9,7 @@ function App() {
     const apiKey = '?api_key=161efc4a60078fa99ee9f7500b81f9e1';
 
     const [popularFilms, setPopularFilms] = useState([]);
+    const [topRatedFilms, setTopRatedFilms] = useState([]);
     const [searchResults, setSearchResults] = useState([]);
 
     function writeFilmsData(results) {
@@ -36,9 +35,19 @@ function App() {
         setPopularFilms(writeFilmsData(results))
     }
 
+    async function getTopRatedFilms() {
+        const data = await fetch(`${apiLink}movie/top_rated${apiKey}`)
+            .then(r => {
+                return r.json()
+            })
+        console.log(data)
+        const results = data.results;
+        setTopRatedFilms(writeFilmsData(results))
+    }
+
     useEffect(() => {
-        getPopularFilms().then()
-        // getAllFilms().then()
+        getPopularFilms().then();
+        getTopRatedFilms().then();
     }, [])
 
     async function searchFilms(titleValue) {
@@ -52,12 +61,19 @@ function App() {
 
     return (
         <div className="App">
-            <SearchForm searchFilm={searchFilms}/>
-            <List films={searchResults}/>
-            {/*<Routes>*/}
-            {/*    <Route path={"/popular"}><List films={popularFilms}/></Route>*/}
-            {/*    <Route path={"/searchResults"}></Route>*/}
-            {/*</Routes>*/}
+            <header>
+                <nav>
+                    <Link to={"/"}>Popular</Link>
+                    <Link to={"/topRated"}>Top Films</Link>
+                </nav>
+                <SearchForm searchFilm={searchFilms}/>
+            </header>
+            <Routes>
+                <Route path={"/"} element={<List films={popularFilms}/>}/>                  //popular
+                <Route path={"/topRated"} element={<List films={topRatedFilms}/>}/>                   //new
+                <Route path={"/searchResults"} element={<List films={searchResults}/>}/>
+                <Route path={"*"} element={<Navigate to={"/"}/>}/>
+            </Routes>
         </div>
     );
 }

@@ -1,12 +1,19 @@
 import {useState} from "react";
+import {useNavigate} from "react-router-dom";
 
 const SearchForm = ({searchFilm}) => {
-
+    let navigate = useNavigate();
     const [titleValue, setTitleValue] = useState('');
-    function onSubmit(e) {
+
+    async function onSubmit(e) {
         e.preventDefault();
-        searchFilm(titleValue);
-        setTitleValue('');
+        if (titleValue) {
+            searchFilm(titleValue);
+            navigate("/searchResults", {replace: true})
+            setTitleValue('');
+        } else {
+            navigate("/", {replace: true})
+        }
     }
 
     function onChange(e) {

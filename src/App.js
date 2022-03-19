@@ -1,6 +1,6 @@
 import SearchForm from "./Components/SearchForm";
 import {useEffect, useState} from "react";
-import {Route, Routes, Navigate, Link} from "react-router-dom";
+import {Route, Routes, Navigate, NavLink} from "react-router-dom";
 import List from "./Components/List";
 import FilmPage from "./Components/FilmPage";
 
@@ -65,8 +65,8 @@ function App() {
         <div className="App">
             <header>
                 <nav>
-                    <Link to={"/"}>Popular</Link>
-                    <Link to={"/topRated"}>Top Films</Link>
+                    <NavLink to={"/"}>Popular</NavLink>
+                    <NavLink to={"/topRated"}>Top Films</NavLink>
                 </nav>
                 <SearchForm searchFilm={searchFilms}/>
             </header>

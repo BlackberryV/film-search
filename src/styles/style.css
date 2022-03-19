@@ -40,6 +40,14 @@ a {
   color: #102244;
 }
 
+a:hover {
+  text-decoration: underline;
+}
+
+.active {
+  text-decoration: underline;
+}
+
 .App {
   display: flex;
   flex-direction: column;

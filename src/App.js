@@ -2,6 +2,7 @@ import SearchForm from "./Components/SearchForm";
 import {useEffect, useState} from "react";
 import {Route, Routes, Navigate, Link} from "react-router-dom";
 import List from "./Components/List";
+import FilmPage from "./Components/FilmPage";
 
 function App() {
 
@@ -16,11 +17,13 @@ function App() {
         let filmsArr = []
         for (const key in results) {
             filmsArr.push({
+                id: results[key].id,
                 adult: results[key].adult,
                 poster: results[key].poster_path,
                 rating: results[key].vote_average,
                 title: results[key].title,
                 overview: results[key].overview,
+                originalLang: results[key].original_language
             })
         }
         return filmsArr;
@@ -40,7 +43,6 @@ function App() {
             .then(r => {
                 return r.json()
             })
-        console.log(data)
         const results = data.results;
         setTopRatedFilms(writeFilmsData(results))
     }
@@ -70,8 +72,9 @@ function App() {
             </header>
             <Routes>
                 <Route path={"/"} element={<List films={popularFilms}/>}/>                  //popular
-                <Route path={"/topRated"} element={<List films={topRatedFilms}/>}/>                   //new
+                <Route path={"/topRated"} element={<List films={topRatedFilms}/>}/>         //new
                 <Route path={"/searchResults"} element={<List films={searchResults}/>}/>
+                <Route path={"/film/:id"} element={<FilmPage/>}/>
                 <Route path={"*"} element={<Navigate to={"/"}/>}/>
             </Routes>
         </div>

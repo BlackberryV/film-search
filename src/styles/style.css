@@ -94,8 +94,39 @@ nav a {
   height: 280px;
 }
 .film-items_container .FilmItem .film-title {
-  margin: 9px 0;
   font-size: 19px;
+  color: #efe6d7;
+}
+
+.page-container {
+  display: flex;
+  justify-content: center;
+  column-gap: 20px;
+  margin-bottom: 100px;
+}
+.page-container .poster {
+  padding: 12px;
+  background-color: #102244;
+}
+.page-container .poster img {
+  height: 450px;
+}
+.page-container .info {
+  padding: 12px;
+  background-color: #cfd4de;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+}
+.page-container .info .title {
+  font-weight: 700;
+  font-size: 30px;
+  text-decoration: underline;
+  padding: 20px;
+}
+.page-container .info span {
+  font-weight: 700;
 }
 
 /*# sourceMappingURL=style.css.map */

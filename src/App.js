@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {Route, Routes, Navigate} from "react-router-dom";
 import List from "./Components/List";
 import FilmPage from "./Components/FilmPage";
-import Header from "./Components/Header";
+import Layout from "./Components/Layout";
 
 function App() {
 
@@ -54,6 +54,10 @@ function App() {
         setGenresData(data.genres)
     }
 
+    async function getFilmsByGenre(id) {
+
+    }
+
     useEffect(() => {
         getPopularFilms().then();
         getTopRatedFilms().then();
@@ -71,15 +75,16 @@ function App() {
 
     return (
         <div className="App">
-            <Header searchFilms={searchFilms} genresData={genresData}/>
             <Routes>
-                <Route path={"/"} element={<List films={popularFilms}/>}/>
-                <Route path={"/topRated"} element={<List films={topRatedFilms}/>}/>
-                <Route path={"/:genre"} element={<List films={searchResults}/>}/>
-                <Route path={"/searchResults"} element={<List films={searchResults}/>}/>
-                <Route path={"/film/:id"} element={<FilmPage/>}/>
-                <Route path={"/genre/:genre"} element={<List/>}/>
-                <Route path={"*"} element={<Navigate to={"/"}/>}/>
+                <Route path={"/"} element={<Layout searchFilms={searchFilms} genresData={genresData}/>}>
+                    <Route path={"/"} index element={<List films={popularFilms}/>}/>
+                    <Route path={"/topRated"} element={<List films={topRatedFilms}/>}/>
+                    <Route path={"/:genre"} element={<List films={searchResults}/>}/>
+                    <Route path={"/searchResults"} element={<List films={searchResults}/>}/>
+                    <Route path={"/film/:id"} element={<FilmPage/>}/>
+                    <Route path={"/genre/:genre"} element={<p>hello i'm working</p>}/>
+                    <Route path={"*"} element={<Navigate to={"/"}/>}/>
+                </Route>
             </Routes>
         </div>
     );

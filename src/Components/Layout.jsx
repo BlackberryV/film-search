@@ -10,9 +10,8 @@ const Layout = ({searchFilms, genresData}) => {
                         <button>Genres</button>
                         <div className="dropdown-content">
                             {genresData.map(genre =>
-                                <NavLink
-                                    to={`genre/${genre.name}`}
-                                    key={genre.id}>{genre.name}
+                                <NavLink to={`genre/${genre.name}`} key={genre.id} state={{genre: genre}}>
+                                    {genre.name}
                                 </NavLink>)}
                         </div>
                     </div>

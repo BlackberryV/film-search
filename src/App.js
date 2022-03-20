@@ -3,6 +3,7 @@ import {Route, Routes, Navigate} from "react-router-dom";
 import List from "./Components/List";
 import FilmPage from "./Components/FilmPage";
 import Layout from "./Components/Layout";
+import GenreSearch from "./Components/GenreSearch";
 
 function App() {
 
@@ -13,6 +14,7 @@ function App() {
     const [topRatedFilms, setTopRatedFilms] = useState([]);
     const [searchResults, setSearchResults] = useState([]);
     const [genresData, setGenresData] = useState([]);
+    const [filmsByGenre, setFilmsByGenre] = useState([]);
 
     function writeFilmsData(results) {
         let filmsArr = []
@@ -54,15 +56,14 @@ function App() {
         setGenresData(data.genres)
     }
 
-    async function getFilmsByGenre(id) {
-
+    async function getFilmsByGenre(genre) {
+        const data = await fetch(`${apiLink}discover/movie${apiKey}&with_genres=${genre.id}`)
+            .then(r => {
+                return r.json()
+            })
+            .then(data => data.results)
+        setFilmsByGenre(writeFilmsData(data));
     }
-
-    useEffect(() => {
-        getPopularFilms().then();
-        getTopRatedFilms().then();
-        getGenres().then();
-    }, [])
 
     async function searchFilms(titleValue) {
         const data = await fetch(`${apiLink}search/movie${apiKey}&query=${titleValue}`)
@@ -73,16 +74,26 @@ function App() {
         setSearchResults(writeFilmsData(results));
     }
 
+    useEffect(() => {
+        getPopularFilms().then();
+        getTopRatedFilms().then();
+        getGenres().then();
+    }, [])
+
     return (
         <div className="App">
             <Routes>
                 <Route path={"/"} element={<Layout searchFilms={searchFilms} genresData={genresData}/>}>
                     <Route path={"/"} index element={<List films={popularFilms}/>}/>
                     <Route path={"/topRated"} element={<List films={topRatedFilms}/>}/>
-                    <Route path={"/:genre"} element={<List films={searchResults}/>}/>
                     <Route path={"/searchResults"} element={<List films={searchResults}/>}/>
                     <Route path={"/film/:id"} element={<FilmPage/>}/>
-                    <Route path={"/genre/:genre"} element={<p>hello i'm working</p>}/>
+                    <Route
+                        path={"/genre/:genre"}
+                        element={
+                            <GenreSearch
+                                films={filmsByGenre}
+                                getFilmsByGenre={getFilmsByGenre}/>}/>
                     <Route path={"*"} element={<Navigate to={"/"}/>}/>
                 </Route>
             </Routes>

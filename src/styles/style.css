@@ -142,14 +142,21 @@ nav {
   z-index: 1;
   background-color: rgba(207, 212, 222, 0.8);
 }
+.dropdown .dropdown-content {
+  height: 300px;
+  width: 500px;
+}
 .dropdown .dropdown-content a {
   padding: 8px 20px;
   border: 1px solid #c6cdda;
+  position: relative;
+  width: 100/3%;
 }
 
 .dropdown:hover .dropdown-content {
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
 }
 
 /*# sourceMappingURL=style.css.map */

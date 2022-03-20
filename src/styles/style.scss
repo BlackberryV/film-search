@@ -73,10 +73,6 @@ nav {
   flex-wrap: nowrap;
   align-items: center;
   column-gap: 20px;
-
-  //a {
-  //  padding: 0 20px;
-  //}
 }
 
 .SearchForm {
@@ -164,13 +160,19 @@ nav {
     z-index: 1;
     background-color: rgb(#cfd4de, 0.8);
   }
+  .dropdown-content {
+    height: 300px;
+    width: 500px;
+  }
   .dropdown-content a {
     padding: 8px 20px;
     border: 1px solid #c6cdda;
+    position: relative;
+    width: 100/3%;
   }
 }
 .dropdown:hover .dropdown-content {
-  //display: block;
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
 }

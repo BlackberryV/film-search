@@ -12,6 +12,7 @@ function App() {
     const [popularFilms, setPopularFilms] = useState([]);
     const [topRatedFilms, setTopRatedFilms] = useState([]);
     const [searchResults, setSearchResults] = useState([]);
+    const [genresData, setGenresData] = useState([]);
 
     function writeFilmsData(results) {
         let filmsArr = []
@@ -34,8 +35,7 @@ function App() {
             .then(r => {
                 return r.json()
             })
-        const results = data.results;
-        setPopularFilms(writeFilmsData(results))
+        setPopularFilms(writeFilmsData(data.results))
     }
 
     async function getTopRatedFilms() {
@@ -43,22 +43,21 @@ function App() {
             .then(r => {
                 return r.json()
             })
-        const results = data.results;
-        setTopRatedFilms(writeFilmsData(results))
+        setTopRatedFilms(writeFilmsData(data.results))
     }
 
-    async function getFilmsByGenre(genre) { //todo
-        const data = await fetch(`${apiLink}movie/top_rated${apiKey}`)
+    async function getGenres() {
+        const data = await fetch(`${apiLink}genre/movie/list${apiKey}`)
             .then(r => {
                 return r.json()
             })
-        const results = data.results;
-        setSearchResults(writeFilmsData(results))
+        setGenresData(data.genres)
     }
 
     useEffect(() => {
         getPopularFilms().then();
         getTopRatedFilms().then();
+        getGenres().then();
     }, [])
 
     async function searchFilms(titleValue) {
@@ -72,13 +71,14 @@ function App() {
 
     return (
         <div className="App">
-            <Header searchFilms={searchFilms}/>
+            <Header searchFilms={searchFilms} genresData={genresData}/>
             <Routes>
-                <Route path={"/"} element={<List films={popularFilms}/>}/> //popular
-                <Route path={"/topRated"} element={<List films={topRatedFilms}/>}/> //new
+                <Route path={"/"} element={<List films={popularFilms}/>}/>
+                <Route path={"/topRated"} element={<List films={topRatedFilms}/>}/>
                 <Route path={"/:genre"} element={<List films={searchResults}/>}/>
                 <Route path={"/searchResults"} element={<List films={searchResults}/>}/>
                 <Route path={"/film/:id"} element={<FilmPage/>}/>
+                <Route path={"/genre/:genre"} element={<List/>}/>
                 <Route path={"*"} element={<Navigate to={"/"}/>}/>
             </Routes>
         </div>

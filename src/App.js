@@ -65,6 +65,16 @@ function App() {
         <div className="App">
             <header>
                 <nav>
+                    <div className="dropdown">
+                        <button className="dropbtn">Genres</button>
+                        <div className="dropdown-content">
+                            <NavLink to={"/drama"}>Drama</NavLink>
+                            <NavLink to={"/action"}>Action</NavLink>
+                            <NavLink to={"/horror"}>Horror</NavLink>
+                            <NavLink to={"/fantasy"}>Fantasy</NavLink>
+                            <NavLink to={"/adventure"}>Adventure</NavLink>
+                        </div>
+                    </div>
                     <NavLink to={"/"}>Popular</NavLink>
                     <NavLink to={"/topRated"}>Top Films</NavLink>
                 </nav>

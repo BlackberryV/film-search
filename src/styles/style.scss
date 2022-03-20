@@ -39,6 +39,7 @@ button {
   color: $light-color;
   font-size: inherit;
   font-family: inherit;
+  padding: 8px 12px;
 }
 
 a {
@@ -64,17 +65,18 @@ header {
   display: flex;
   justify-content: space-between;
   width: 70%;
-  align-items: center;
   padding: 40px;
 }
 
 nav {
   display: flex;
   flex-wrap: nowrap;
+  align-items: center;
+  column-gap: 20px;
 
-  a {
-    padding: 0 20px;
-  }
+  //a {
+  //  padding: 0 20px;
+  //}
 }
 
 .SearchForm {
@@ -127,11 +129,11 @@ nav {
   .poster {
     padding: 12px;
     background-color: $accent-color;
+
     img {
       height: 450px;
     }
   }
-
 
   .info {
     padding: 12px;
@@ -152,4 +154,23 @@ nav {
       font-weight: 700;
     }
   }
+}
+
+
+.dropdown {
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    background-color: rgb(#cfd4de, 0.8);
+  }
+  .dropdown-content a {
+    padding: 8px 20px;
+    border: 1px solid #c6cdda;
+  }
+}
+.dropdown:hover .dropdown-content {
+  //display: block;
+  display: flex;
+  flex-direction: column;
 }

@@ -5,7 +5,6 @@ const FilmPage = () => {
     const location = useLocation();
     const {film} = location.state;
     const [filmData] = useState(film)
-
     return (
         <div className={"page-container"}>
             <div className={"poster"}>

@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 
 const FilmItem = ({film}) => {
     return (
-        <div key={film.title} className={"FilmItem"}>
+        <div key={film.id} className={"FilmItem"}>
             <img src={`https://image.tmdb.org/t/p/original/${film.poster}`} alt={`${film.title}`}/>
             <Link
                 to={`/film/${film.id}`}

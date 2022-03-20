@@ -1,8 +1,8 @@
-import SearchForm from "./Components/SearchForm";
 import {useEffect, useState} from "react";
-import {Route, Routes, Navigate, NavLink} from "react-router-dom";
+import {Route, Routes, Navigate} from "react-router-dom";
 import List from "./Components/List";
 import FilmPage from "./Components/FilmPage";
+import Header from "./Components/Header";
 
 function App() {
 
@@ -23,7 +23,7 @@ function App() {
                 rating: results[key].vote_average,
                 title: results[key].title,
                 overview: results[key].overview,
-                originalLang: results[key].original_language
+                originalLang: results[key].original_language,
             })
         }
         return filmsArr;
@@ -47,6 +47,15 @@ function App() {
         setTopRatedFilms(writeFilmsData(results))
     }
 
+    async function getFilmsByGenre(genre) { //todo
+        const data = await fetch(`${apiLink}movie/top_rated${apiKey}`)
+            .then(r => {
+                return r.json()
+            })
+        const results = data.results;
+        setSearchResults(writeFilmsData(results))
+    }
+
     useEffect(() => {
         getPopularFilms().then();
         getTopRatedFilms().then();
@@ -63,26 +72,11 @@ function App() {
 
     return (
         <div className="App">
-            <header>
-                <nav>
-                    <div className="dropdown">
-                        <button className="dropbtn">Genres</button>
-                        <div className="dropdown-content">
-                            <NavLink to={"/drama"}>Drama</NavLink>
-                            <NavLink to={"/action"}>Action</NavLink>
-                            <NavLink to={"/horror"}>Horror</NavLink>
-                            <NavLink to={"/fantasy"}>Fantasy</NavLink>
-                            <NavLink to={"/adventure"}>Adventure</NavLink>
-                        </div>
-                    </div>
-                    <NavLink to={"/"}>Popular</NavLink>
-                    <NavLink to={"/topRated"}>Top Films</NavLink>
-                </nav>
-                <SearchForm searchFilm={searchFilms}/>
-            </header>
+            <Header searchFilms={searchFilms}/>
             <Routes>
-                <Route path={"/"} element={<List films={popularFilms}/>}/>                  //popular
-                <Route path={"/topRated"} element={<List films={topRatedFilms}/>}/>         //new
+                <Route path={"/"} element={<List films={popularFilms}/>}/> //popular
+                <Route path={"/topRated"} element={<List films={topRatedFilms}/>}/> //new
+                <Route path={"/:genre"} element={<List films={searchResults}/>}/>
                 <Route path={"/searchResults"} element={<List films={searchResults}/>}/>
                 <Route path={"/film/:id"} element={<FilmPage/>}/>
                 <Route path={"*"} element={<Navigate to={"/"}/>}/>

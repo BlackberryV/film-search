@@ -76,9 +76,15 @@ function App() {
 
     useEffect(() => {
         getPopularFilms().then();
-        getTopRatedFilms().then();
+    }, [popularFilms])
+
+    useEffect(() => {
         getGenres().then();
-    }, [])
+    }, [genresData])
+
+    useEffect(() => {
+        getTopRatedFilms().then();
+    }, [topRatedFilms])
 
     return (
         <div className="App">
